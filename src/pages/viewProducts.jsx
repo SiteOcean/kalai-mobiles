@@ -19,12 +19,12 @@ export default function ViewProducts (){
           };
         fetchData();
     },[]);
-
-    console.log(pro)
     return(
         <div>
-            {id}
-           {pro &&  <div className='flex'>
+            <div className='bg-[#5582ff] p-4 text-center font-bold text-white text-[25px]'>
+                
+                Sulur Service Center</div>
+           {pro &&  <div className='flex flex-col sm:flex-row pt-5'>
       <div className='flex-1 flex justify-center pl-12 flex-col'>
       <h1>{pro.title}</h1>
       <p>Category: {pro.category}</p>

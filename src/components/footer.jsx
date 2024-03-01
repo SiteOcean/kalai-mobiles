@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="bg-blue-500 text-white py-8 ">
       <div className="container mx-auto flex  justify-between items-center">
         <div className="mb-4">
-          <p className="text-lg font-bold">Your Website Name</p>
+          <p className="text-lg font-bold">Sulur Service Center</p>
           <p>&copy; {new Date().getFullYear()}</p>
         </div>
         <div className="flex space-x-4">
