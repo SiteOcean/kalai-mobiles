@@ -5,7 +5,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="bg-blue-500 text-white py-8 ">
-      <div className="container mx-auto flex  justify-between items-center">
+      <div className="container mx-auto flex px-3 justify-between items-center">
         <div className="mb-4">
           <p className="text-lg font-bold">Sulur Service Center</p>
           <p>&copy; {new Date().getFullYear()}</p>

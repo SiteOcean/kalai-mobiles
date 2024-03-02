@@ -15,17 +15,15 @@ const ProductCard = ({ val }) => {
   return (
     <div onClick={navigateToViewPage} className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
       <img width={100} height={100} src={val.thumbnail} alt={"image"} className="w-full h-48 object-cover bg-cover" />
-      <div className="px-6 py-4">
+      <div className="p-2">
         <div className="font-bold text-xl mb-2">{val.name}</div>
         <p>{val.brand}</p>
-        <p className="text-gray-700 text-base">{val.description}</p>
-      </div>
-      <div className="px-6 py-4">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
+        <p className="text-gray-700 text-base">{val.description.slice(0, 25)}</p>
+        <span className="inline-block bg-gray-100 rounded-md px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
           {val.category}
         </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-          ${val.price}
+        <span className="inline-block bg-gray-100 rounded-md px-3 py-1 text-sm font-semibold text-gray-700">
+          {val.price}<span className='text-[10px] text-gray-400 ml-1'>Rs</span>
         </span>
       </div>
     </div>

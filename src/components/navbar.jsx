@@ -1,45 +1,59 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { LuMenuSquare } from "react-icons/lu";
+import { useRouter } from 'next/router';
+import { MdOutlineClose } from "react-icons/md";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const router = useRouter(null)
   return (
-    <nav className="bg-[#5582ff] p-4">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="bg-blue-500 p-4 z-50 sticky top-0">
+      <div className={`container mx-auto  sm:flex justify-between  sm:gap-0 items-center `}>
         {/* Brand/Logo */}
-        <div className="text-white font-bold text-xl">
+        <div className="text-white font-bold text-2xl">
           <Link href="/">
-           Kalai Mobiles
+           Sulur Service Center
           </Link>
         </div>
 
         {/* Hamburger Icon for Mobile */}
-        <div className="block lg:hidden">
-          <button
+        <div className="text-white text-[37px] sm:hidden  absolute top-3 right-3">
+          <button onBlur={()=>setMenuOpen(false)}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="text-white focus:outline-none"
+            className=" focus:outline-none duration-500"
           >
-            <svg
-              className="h-6 w-6 fill-current"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
+            {menuOpen ? <MdOutlineClose className='duration-500'/>:
+            <LuMenuSquare className='duration-500'/>}
+          
           </button>
         </div>
 
+
         {/* Navigation Links */}
-        <div className={`lg:flex ${menuOpen ? 'block' : 'hidden'}`}>
-          <div className="text-white lg:flex items-center space-x-12">
-            <Link href="/">
+        <div className={`hidden sm:block `}>
+          <div className="text-white flex flex-col sm:flex-row font-bold items-center space-y-2 sm:space-y-0 md:space-x-12">
+          <Link href="/" className={`${router.pathname === "/" ? "text-blue-100 underline underline-offset-4" :""}`}>
               Home
             </Link>
-            <Link href="/about">
+            <Link href="/about" className={`${router.pathname === "/about" ? "text-blue-100 underline underline-offset-4" :""}`}>
              About
             </Link>
-            <Link href="/contact">
+            <Link href="/contact" className={`${router.pathname === "/contact" ? "text-blue-100 underline underline-offset-4" :""}`}>
+              Contact
+            </Link>
+          </div>
+        </div>
+
+        <div className={`sm:hidden z-40 fixed sm:relative w-[60%] min-h-[90vh] space-y-3 opacity-95 bg-blue-100 sm:bg-inherit duration-500  ${menuOpen ? 'block left-0 top-[63px]' : 'top-[63px] -left-[100%]'} `}>
+          <div className="font-bold text-[19px] text-blue-500 flex flex-col pl-5 space-y-5 py-3 sm:space-y-0 md:space-x-12">
+            <Link href="/" className={`${router.pathname === "/" ? "text-blue-700 underline underline-offset-4" :""}`}>
+              Home
+            </Link>
+            <Link href="/about" className={`${router.pathname === "/about" ? "text-blue-700 underline underline-offset-4" :""}`}>
+             About
+            </Link>
+            <Link href="/contact" className={`${router.pathname === "/contact" ? "text-blue-700 underline underline-offset-4" :""}`}>
               Contact
             </Link>
           </div>
