@@ -16,7 +16,7 @@ const ProductCard = ({ val }) => {
     <div onClick={navigateToViewPage} className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
       <img width={100} height={100} src={val.thumbnail} alt={"image"} className="w-full h-48 object-cover bg-cover" />
       <div className="p-2 space-y-1">
-        {console.log(val)}
+       
         <div className="font-bold text-md sm:text-xl ">{val.brand}</div>
         <p>{val.title}</p>
         <p className="text-gray-400 text-sm sm:text-md ">{val.description.slice(0, 30)}</p>
