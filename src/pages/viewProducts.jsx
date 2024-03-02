@@ -50,8 +50,8 @@ export default function ViewProducts (){
             <div className='bg-[#5582ff] flex items-center py-3 px-3 sm:px-12 gap-x-3 font-bold text-white text-[25px]'>
                 
                <MdOutlineArrowBack className='cursor-pointer' onClick={()=>router.back()}/> Sulur Service Center</div>
-           {pro &&  <div className='flex flex-col-reverse sm:flex-row p-3 md:pt-5'>
-      <div className='flex-1 sm:gap-y-2 flex md:justify-center p-5 md:pl-12 flex-col border-x border-b sm:border-none'>
+           {pro &&  <div className='flex flex-col-reverse sm:flex-row p-3 sm:p-5 md:pt-5 capitalize'>
+      <div className='flex-1 sm:gap-y-2 pl-3 pt-2 space-y-1 flex md:justify-center flex-col border-x border-b sm:border-none'>
       <h1 className='font-bold text-blue-500 text-xl'>{pro.title}</h1>
       <p ><span className='font-bold'>Category:</span> {pro.category}</p>
       {/* <p><span className='font-bold'>Description: </span>{pro.description}</p> */}
@@ -60,16 +60,14 @@ export default function ViewProducts (){
       <p><span className='font-bold'>Price: $</span>{pro.price}</p>
       {/* <p><span className='font-bold'>Rating:</span> {pro.rating}</p> */}
       <p><span className='font-bold'>Stock: </span>{pro.stock}</p>
-      <div className='flex gap-6 mt-5'>
-     
-     
       
-      <a href="tel:+123456789" className="bg-[#41d7eb] flex-1 w-[60px] p-2 rounded-md flex justify-center items-center"><MdCall className='text-white font-bold text-[25px] text-center self-center'/></a>
-      <button onClick={redirectToWhatsApp} className=' bg-[#4cf34c] flex-1 w-[60px] p-2 rounded-md flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[25px] text-center self-center'/></button>
+      <div className='flex justify-between sm:justify-start gap-6 mt-5'>
+      <a href="tel:+123456789" className="bg-[#41d7eb]   w-[60px] p-2 rounded-md flex justify-center items-center"><MdCall className='text-white font-bold text-[25px] text-center self-center'/></a>
+      <button onClick={redirectToWhatsApp} className=' bg-[#4cf34c]   w-[60px] p-2 rounded-md flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[25px] text-center self-center'/></button>
       </div>
       </div>
-      <div className='h-[300px]'>
-      <img  className='flex-1 h-full rounded-t-md sm:rounded-md' src={pro.thumbnail} alt={"img"} />
+      <div className='h-[250px] flex-1'>
+      <img className='h-full rounded-t-md sm:rounded-md' src={pro.thumbnail} alt={"img"} />
 
       </div>
         </div>}

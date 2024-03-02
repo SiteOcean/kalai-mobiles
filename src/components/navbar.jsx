@@ -19,10 +19,12 @@ const Navbar = () => {
         </div>
 
         {/* Hamburger Icon for Mobile */}
-        <div className="text-white text-[37px] sm:hidden  absolute top-3 right-3">
+        <div className="text-white flex items-center sm:hidden gap-x-9 absolute top-3 right-3">
+        <Link href={'/offerZone'} className={`text-[20px] font-semibold z-50 flex items-center justify-center gap-x-2 pt-1  text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}>Offers<MdOutlineLocalOffer className='absolute top-0.5 animate-pulse text-[yellow] -right-3.5 z-10'/></Link>
+
           <button onBlur={()=>setMenuOpen(false)}
             onClick={() => setMenuOpen(!menuOpen)}
-            className=" focus:outline-none duration-500"
+            className=" focus:outline-none duration-500 text-[30px]"
           >
             {menuOpen ? <MdOutlineClose className='duration-500'/>:
             <LuMenuSquare className='duration-500'/>}

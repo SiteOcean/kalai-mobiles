@@ -38,7 +38,7 @@ export default function MainHomeComp (){
         }
         setHomePageProducts(
                 products.filter((val,i)=>{
-                    return cat === val.brand.toLowerCase()
+                    return catName === val.brand.toLowerCase()
                 })
             )
             setPlaceHolder(cat)
@@ -69,14 +69,14 @@ export default function MainHomeComp (){
     },[products])
 
     return(
-        <div> 
-            <BannerSection/>
+        <div className='bg-blur '> 
+            {/* <BannerSection/> */}
 
-        
-            <div className="flex flex-1 mt-2 relative w-[82%] sm:w-[30%] mx-auto pb-3">
+            
+            <div className="flex flex-1 mt-3 relative w-[82%] sm:w-[30%] mx-auto pb-3">
               <input ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
-                className="py-2 px-1 sm:py-2 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-[#eeeded] outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
-                <button whileTap={{ scale: 1.1 }} type="submit" className="text-[#413f3f]  bg-[#eeeded]    duration-500 w-[70px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#acacac]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
+                className="py-2 px-1 sm:py-1.5 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-blue-200 outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
+                <button whileTap={{ scale: 1.1 }} type="submit" className="text-[white]  bg-blue-500   duration-500 w-[70px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#acacac]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
                 {dropDownList && dropDownList.length > 0 ?<ul className={`absolute h-[300px]
                  -bottom-[300px] overflow-y-auto z-50 left-0 right-0`}>
                   {dropDownList.map((val, index)=>{
@@ -86,7 +86,7 @@ export default function MainHomeComp (){
                 </div>
             
             {/* <h1 className='text-center font-bold text-[28px] text-gray-500 py-2'>Select Category</h1> */}
-            <div className='flex gap-x-3 overflow-auto w-full justify-center p-2 items-center'>
+            <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
             <ul className='flex gap-x-9 w-[82%] mx-auto overflow-auto'>
