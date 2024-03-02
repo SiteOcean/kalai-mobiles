@@ -1,3 +1,4 @@
+import ImageCarousel from '@/components/imageCarousel';
 import DescriptionReadmore from '@/components/readMoreComp';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -44,7 +45,6 @@ export default function ViewProducts (){
           };
         fetchData();
     },[productId]);
-    
     return(
         <div>
             <div className='bg-[#5582ff] flex items-center py-3 px-3 sm:px-12 gap-x-3 font-bold text-white text-[25px]'>
@@ -67,8 +67,8 @@ export default function ViewProducts (){
       </div>
       </div>
       <div className='h-[250px] flex-1'>
-      <img className='h-full rounded-t-md sm:rounded-md' src={pro.thumbnail} alt={"img"} />
-
+        <ImageCarousel imgData={pro.images}/>
+      {/* <img className='h-full rounded-t-md sm:rounded-md' src={pro.thumbnail} alt={"img"} /> */}
       </div>
         </div>}
           </div>

@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import BannerSection from './banner';
 import CategoryList from './categoryList';
 
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaWhatsapp } from "react-icons/fa";
 import ProductCard from './productsCard';
 import { useSiteDataContext } from '@/store/storeProvider';
+import CustomLoader from '../loader';
 let products = null;
 let catName = 'all';
 export default function MainHomeComp (){
@@ -68,11 +69,31 @@ export default function MainHomeComp (){
         setHomePageProducts(products)
     },[products])
 
+    const redirectToWhatsApp = async() => {
+        // if (!phoneNumber) {
+        //   return;
+        // }
+    
+        const message = pro && pro.title
+          ? `I'm Intrested in This : "${pro.title}"`
+          : `Hi, ${pro.title}`;
+    
+        const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/${123456}?text=${encodedMessage}`;
+    
+        try {
+          window.open(whatsappUrl, '_blank');
+        } catch (error) {
+          
+        }
+      };
+
     return(
-        <div className='bg-blur '> 
+        <div className='relative'> 
             {/* <BannerSection/> */}
 
-            
+            <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-3 animate-bounce right-1 sm:right-3  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
+
             <div className="flex flex-1 mt-3 relative w-[82%] sm:w-[30%] mx-auto pb-3">
               <input ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
                 className="py-2 px-1 sm:py-1.5 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-blue-200 outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
@@ -105,11 +126,11 @@ export default function MainHomeComp (){
             
             </div>
 
-            <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 p-5'>
-                {hompageProducts && hompageProducts.length > 0 ? hompageProducts.map((val,i)=>{
+            {hompageProducts && hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 p-5'>
+                 {hompageProducts.map((val,i)=>{
                     return <ProductCard val={val}/>
-                }) : <div>Loading...</div>}
-            </div>
+                })} 
+            </div>: <CustomLoader/>}
 
         </div>
     )

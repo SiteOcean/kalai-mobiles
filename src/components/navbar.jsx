@@ -4,6 +4,7 @@ import { LuMenuSquare } from "react-icons/lu";
 import { useRouter } from 'next/router';
 import { MdOutlineClose } from "react-icons/md";
 import { MdOutlineLocalOffer } from "react-icons/md";
+import { MdMobileFriendly } from "react-icons/md";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +13,8 @@ const Navbar = () => {
     <nav className="bg-blue-500 p-4 z-50 sticky top-0">
       <div className={`container mx-auto  sm:flex justify-between  sm:gap-0 items-center `}>
         {/* Brand/Logo */}
-        <div className="text-white font-bold text-2xl">
+        <div className="text-white flex items-center gap-x-2 font-bold text-lg sm:text-2xl">
+          <MdMobileFriendly/>
           <Link href="/">
            Sulur Service Center
           </Link>
@@ -46,6 +48,9 @@ const Navbar = () => {
             <Link href="/contact" className={`${router.pathname === "/contact" ? "text-blue-100 underline underline-offset-4" :""}`}>
               Contact
             </Link>
+            <Link href="/service" className={`${router.pathname === "/service" ? "text-blue-100 underline underline-offset-4" :""}`}>
+              Service
+            </Link>
             <Link href={'/offerZone'} className={`text-[20px] flex items-center justify-center gap-x-2 pt-1  text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :" animate-bounce"}`}>Offer<MdOutlineLocalOffer className='absolute top-0 -right-4'/></Link>
           </div>
         </div>
@@ -60,6 +65,9 @@ const Navbar = () => {
             </Link>
             <Link href="/contact" className={`${router.pathname === "/contact" ? " underline underline-offset-4" :""}`}>
               Contact
+            </Link>
+            <Link href="/service" className={`${router.pathname === "/service" ? " underline underline-offset-4" :""}`}>
+              Services
             </Link>
           </div>
         </div>
