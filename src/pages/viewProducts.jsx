@@ -1,4 +1,4 @@
-import ImageCarousel from '@/components/imageCarousel';
+import MyCarousel from '@/components/imageCarousel';
 import DescriptionReadmore from '@/components/readMoreComp';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -67,7 +67,8 @@ export default function ViewProducts (){
       </div>
       </div>
       <div className='h-[250px] flex-1'>
-        <ImageCarousel imgData={pro.images}/>
+       <MyCarousel images={pro.images}/>
+        {/* // <ImageCarousel imgData={pro.images}/> */}
       {/* <img className='h-full rounded-t-md sm:rounded-md' src={pro.thumbnail} alt={"img"} /> */}
       </div>
         </div>}

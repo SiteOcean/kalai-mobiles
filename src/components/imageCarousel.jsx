@@ -1,19 +1,18 @@
-import React from 'react'; 
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
-import { Carousel } from 'react-responsive-carousel'; 
+// Carousel.js
+import React from 'react';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
 
-const ImageCarousel =({imgData})=> { 
-	 
-		return ( 
-			<Carousel interval={1000}> 
-                {imgData && imgData.length > 0 ? imgData.map((image)=>{
-                    return <img alt="img" src={image}/>
-                }) : null}
-				
-			</Carousel> 
-			
-		); 
-	
+const MyCarousel = ({ images }) => {
+  return (
+    <div className=''>
+        <AwesomeSlider>
+      {images.map((image, index) => (
+        <div key={index} data-src={image} />
+      ))}
+    </AwesomeSlider>
+    </div>
+  );
 };
 
-export default ImageCarousel
+export default MyCarousel;
