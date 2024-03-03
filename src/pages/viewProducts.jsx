@@ -58,7 +58,7 @@ export default function ViewProducts (){
       {/* <p><span className='font-bold'>Rating:</span> {pro.rating}</p> */}
       <p><span className='font-bold'>Stock: </span>{pro.stock}</p>
       
-      <div className='flex justify-between sm:justify-start gap-6 mt-5'>
+      <div className='flex justify-between sm:justify-start gap-6 mt-7'>
       <a href="tel:+123456789" className="bg-[#41d7eb]   w-[60px] p-2 rounded-md flex justify-center items-center"><MdCall className='text-white font-bold text-[25px] text-center self-center'/></a>
       <button onClick={redirectToWhatsApp} className=' bg-[#4cf34c]   w-[60px] p-2 rounded-md flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[25px] text-center self-center'/></button>
       </div>

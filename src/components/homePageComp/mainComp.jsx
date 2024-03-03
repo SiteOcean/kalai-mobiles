@@ -88,7 +88,7 @@ export default function MainHomeComp (){
             <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
             <div className="flex flex-1 mt-3 relative w-[92%] sm:w-[30%] mx-auto pb-3">
-              <input ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
+              <input onBlur={()=>setDropDownList(null)} ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
                 className="py-2 px-1 sm:py-1.5 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-blue-200 outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
                 <button type="submit" className="text-[white]  bg-blue-500   duration-500 w-[70px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#acacac]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
                 {dropDownList && dropDownList.length > 0 ?<ul className={`absolute h-[300px]
