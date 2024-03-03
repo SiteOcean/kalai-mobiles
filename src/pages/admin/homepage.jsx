@@ -7,7 +7,8 @@ import BufferedImage from '@/components/bufferImage';
 import EditProductComp from '@/components/editProductComp';
 let editItemData;
 import { MdEdit } from "react-icons/md";
-
+// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 export default function AdminHomePage (){
 
     
@@ -25,7 +26,7 @@ export default function AdminHomePage (){
               if (confirmDelete) {
           
          try{
-          const response = await axios.post('http://localhost:3030/project/deleteProductById', {_id:id});
+          const response = await axios.post(backendPath+'deleteProductById', {_id:id});
           if(response.status == 200){
             setProducts(
               products.filter((val) => {
@@ -42,7 +43,7 @@ export default function AdminHomePage (){
       
     const fetchData = async () => {
         try {
-          const response = await axios.get('http://localhost:3030/project/getAllProducts');
+          const response = await axios.get(backendPath+'getAllProducts');
           if(response.status == 200){
             setProducts(response.data)
           }

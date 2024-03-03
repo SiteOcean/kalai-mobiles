@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 const SignupForm = () => {
   const [adminUser, setAdminUser] = useState({
     username: '',
@@ -53,7 +55,7 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3030/project/createAdmin', adminUser);
+      const response = await axios.post(backendPath+'createAdmin', adminUser);
       console.log('User created:', response.status);
       if(response.status === 200){
         alert("Admin Created Success!")

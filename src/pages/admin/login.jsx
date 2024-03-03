@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
+// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -32,7 +34,7 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3030/project/adminLogin', { username, password });
+      const response = await axios.post(backendPath+'adminLogin', { username, password });
 
       if (response && response.data && response.data.message === 'Login successful') {
         router.push('/admin/homepage/?id=' + response.data.admin._id);

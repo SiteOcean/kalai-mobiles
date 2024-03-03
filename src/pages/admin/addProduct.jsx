@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { MdOutlineArrowBack } from 'react-icons/md';
 
+import { MdOutlineArrowBack } from 'react-icons/md';
+import { categoryDataList } from '../api/config';
+// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 const AddProductForm = () => {
   const [name, setProductName] = useState('');
   const [title, setProductTitle] = useState('');
@@ -10,11 +13,14 @@ const AddProductForm = () => {
   const [brand, setProductBrand] = useState('');
   const [price, setProductPrice] = useState('');
   const [offer, setProductOffer] = useState('');
+  const [category, setCategory] = useState('');
   const [images, setImages] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
 
   const router = useRouter(null)
+
   const handleInputChange = (e, setter) => {
+    console.log(e.target.value)
     setter(e.target.value);
   };
 
@@ -40,6 +46,9 @@ const AddProductForm = () => {
 
     if (!brand.trim()) {
       errors.brand = 'Product Brand is required';
+    }
+    if (!category.trim()) {
+      errors.category = 'Product Category is required';
     }
 
     if (!price.trim()) {
@@ -80,14 +89,14 @@ const AddProductForm = () => {
         formData.append('brand', brand);
         formData.append('price', price);
         formData.append('offer', offer);
+        formData.append('category', category);
         images.forEach((image) => formData.append('images', image));
         
-        const response = await axios.post('http://localhost:3030/project/addProduct', formData);
+        const response = await axios.post(backendPath+'addProduct', formData);
        
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log('Product added successfully:', data);
+        if (response.status == 200) {
+          router.back()
         } else {
           console.error('Failed to add product');
         }
@@ -166,6 +175,20 @@ const AddProductForm = () => {
           <span className="text-red-500 text-sm">{validationErrors.brand}</span>
         )}
       </div>
+      <div className="mb-2">
+        <label for="phoneSelect" className="block pb-1 text-gray-400 underline text-sm font-bold ">Select Category:</label>
+        
+        <select onChange={(e) => handleInputChange(e, setCategory)} id="phoneSelect" name="phone" className={`w-full border ${validationErrors.category ? 'border-red-500' : 'border-gray-300'} p-2 rounded-md text-gray-500 capitalize focus:outline-none focus:border-blue-500`}>
+        <option value="">Select Category</option>
+        {categoryDataList.map((val)=>{
+          return (<option value={val}>{val}</option>)
+        })}
+        </select>
+      </div>
+      {validationErrors.category && (
+          <span className="text-red-500 text-sm">{validationErrors.category}</span>
+        )}
+
 
       <div className="mb-2">
         <label className="block text-gray-400 underline text-sm font-bold " htmlFor="productPrice">

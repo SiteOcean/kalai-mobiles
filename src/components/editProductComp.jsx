@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { MdClose } from "react-icons/md";
-
+// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 const EditProductComp = ({item, submitEdit}) => {
 
 
@@ -82,7 +83,7 @@ const EditProductComp = ({item, submitEdit}) => {
             images.forEach((image) => formData.append('images', image));
         }
         
-        const response = await axios.post('http://localhost:3030/project/updateProductById', formData);
+        const response = await axios.post(backendPath+'updateProductById', formData);
        
 
         if (response.status == 200) {
