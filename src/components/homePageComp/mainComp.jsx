@@ -70,16 +70,9 @@ export default function MainHomeComp (){
     },[products])
 
     const redirectToWhatsApp = async() => {
-        // if (!phoneNumber) {
-        //   return;
-        // }
-    
-        const message = pro && pro.title
-          ? `I'm Intrested in This : "${pro.title}"`
-          : `Hi, ${pro.title}`;
-    
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/${123456}?text=${encodedMessage}`;
+       
+        const encodedMessage = encodeURIComponent("Hi, Sulur Service Center. ");
+        const whatsappUrl = `https://wa.me/${+918148140754}?text=${encodedMessage}`;
     
         try {
           window.open(whatsappUrl, '_blank');
@@ -89,12 +82,12 @@ export default function MainHomeComp (){
       };
 
     return(
-        <div className='relative'> 
+        <div className='relative w-full'> 
             {/* <BannerSection/> */}
 
-            <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-3 animate-bounce right-1 sm:right-3  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
+            <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
-            <div className="flex flex-1 mt-3 relative w-[82%] sm:w-[30%] mx-auto pb-3">
+            <div className="flex flex-1 mt-3 relative w-[92%] sm:w-[30%] mx-auto pb-3">
               <input ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
                 className="py-2 px-1 sm:py-1.5 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-blue-200 outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
                 <button type="submit" className="text-[white]  bg-blue-500   duration-500 w-[70px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#acacac]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
@@ -110,7 +103,7 @@ export default function MainHomeComp (){
             <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
-            <ul className='flex gap-x-9 w-[82%] mx-auto overflow-auto'>
+            <ul className='flex gap-x-9 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
             <li onClick={() => SelectBrand("all")} className={`list-none font-bold block w-[500px] ${catName == 'all' ? 'text-blue-500' : "text-gray-600"}`}>
                         All
                     </li>
@@ -126,11 +119,13 @@ export default function MainHomeComp (){
             
             </div>
 
-            {hompageProducts && hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 p-5'>
+           <div className='w-full'>
+           {hompageProducts && hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-3 p-3 sm:gap-5 sm:p-5'>
                  {hompageProducts.map((val,i)=>{
-                    return <ProductCard val={val}/>
+                    return <ProductCard key={i} val={val}/>
                 })} 
-            </div>: <CustomLoader/>}
+            </div>: <div className='w-full'><CustomLoader/></div>}
+           </div>
 
         </div>
     )

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { LuMenuSquare } from "react-icons/lu";
 import { useRouter } from 'next/router';
-import { MdOutlineClose } from "react-icons/md";
+import { MdLocalOffer, MdOutlineClose } from "react-icons/md";
 import { MdOutlineLocalOffer } from "react-icons/md";
 import { MdMobileFriendly } from "react-icons/md";
 
@@ -11,18 +11,18 @@ const Navbar = () => {
   const router = useRouter(null)
   return (
     <nav className="bg-blue-500 p-4 z-50 sticky top-0">
-      <div className={`container mx-auto  sm:flex justify-between  sm:gap-0 items-center `}>
+      <div className={`w-[95%] mx-auto  sm:flex justify-between  sm:gap-0 items-center `}>
         {/* Brand/Logo */}
         <div className="text-white flex items-center gap-x-2 font-bold text-lg sm:text-2xl">
-          <MdMobileFriendly/>
+        
           <Link href="/">
            Sulur Service Center
           </Link>
         </div>
 
         {/* Hamburger Icon for Mobile */}
-        <div className="text-white flex items-center sm:hidden gap-x-9 absolute top-3 right-3">
-        <Link href={'/offerZone'} className={`text-[20px] font-semibold z-50 flex items-center justify-center gap-x-2 pt-1  text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}>Offers<MdOutlineLocalOffer className='absolute top-0.5 animate-pulse text-[yellow] -right-3.5 z-10'/></Link>
+        <div className="text-white flex items-center sm:hidden gap-x-4 absolute top-3 right-3">
+        <Link href={'/offerZone'} className={`border-2 text-center rounded-md p-1 text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}><MdLocalOffer className='animate-pulse text-[yellow] text-[16px]'/></Link>
 
           <button onBlur={()=>setMenuOpen(false)}
             onClick={() => setMenuOpen(!menuOpen)}
