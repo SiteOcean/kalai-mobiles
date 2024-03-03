@@ -3,30 +3,31 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
+import BufferedImage from '../bufferImage';
 
 const ProductCard = ({ val }) => {
   
     const navigator = useRouter(null)
 
     const navigateToViewPage=()=>{
-        navigator.push('/viewProducts?id='+val.id)
+        navigator.push('/viewProducts?id='+val._id)
     }
 
   return (
-    <div onClick={navigateToViewPage} className="max-w-sm rounded overflow-hidden shadow-lg bg-white">
-      <img width={100} height={100} src={val.thumbnail} alt={"image"} className="w-full h-48 object-cover bg-cover" />
-      <div className="p-2 space-y-1">
+    <div onClick={navigateToViewPage} className="max-w-sm relative rounded-sm overflow-hidden shadow-lg bg-white">
+      <BufferedImage imageBuffer={val.images[0]} alt="Buffered Image" className="w-full h-[150px] rounded-sm sm:h-[170px] object-fill" />
+
+      <div className="p-2">
        
         <div className="font-bold text-md sm:text-xl ">{val.brand}</div>
         <p>{val.title}</p>
         <p className="text-gray-400 text-sm sm:text-md ">{val.description.slice(0, 30)}</p>
-        {/* <span className=" hidden md:block bg-gray-100 rounded-md px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          {val.category}
-        </span> */}
-        <span className="inline-block bg-gray-100 rounded-md p-2 py-1 text-sm font-semibold text-gray-700">
-          {val.price}<span className='text-[10px] text-gray-400 ml-1 '>Rs</span>
+       
+        <span className="block text-center mt-2 bg-gray-100 rounded-md p-2 py-1 text-sm font-semibold text-gray-700">
+        <span className='text-[10px] text-gray-400 ml-1 '>Rs</span> {val.price}
         </span>
       </div>
+      <span className='absolute top-0 right-0 bg-[yellow] p-2 rounded-sm'>{val.offer}%</span>
     </div>
   );
 };

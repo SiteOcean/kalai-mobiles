@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col-reverse gap-y-1 sm:flex-row px-3 sm:justify-between sm:items-center">
         <div className="mb-4">
           <p className="text-lg font-bold">Sulur Service Center</p>
-          <p>&copy; {new Date().getFullYear()}</p>
+          <p onDoubleClick={()=>router.push('/admin/login')}>&copy; {new Date().getFullYear()}</p>
         </div>
         <div className="flex space-x-4">
          <p>Twitter</p>

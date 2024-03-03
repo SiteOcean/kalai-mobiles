@@ -6,6 +6,7 @@ import { FaSearch, FaWhatsapp } from "react-icons/fa";
 import ProductCard from './productsCard';
 import { useSiteDataContext } from '@/store/storeProvider';
 import CustomLoader from '../loader';
+import axios from 'axios';
 let products = null;
 let catName = 'all';
 export default function MainHomeComp (){
@@ -13,15 +14,15 @@ export default function MainHomeComp (){
     const categories = ['Nokia', 'Samsung', 'Apple', 'Sony'];
 
     const {hompageProducts, setHomePageProducts} = useSiteDataContext();
-    const [dropDownList, setDropDownList] = useState(null)
+    const [dropDownList, setDropDownList] = useState(null);
     const inputRef = useRef(null);
     const [placeHolder, setPlaceHolder] = useState('')
+    
     const fetchData = async () => {
         try {
-          const response = await fetch('https://dummyjson.com/products');
-          const json = await response.json();
-          setHomePageProducts(json.products);
-          products = json.products;
+            const response = await axios.get('http://localhost:3030/project/getAllProducts');
+          setHomePageProducts(response.data);
+          products = response.data;
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -82,15 +83,16 @@ export default function MainHomeComp (){
       };
 
     return(
-        <div className='relative w-full'> 
+        <div onBlur={()=>setDropDownList(null)} className='relative w-full'> 
             {/* <BannerSection/> */}
 
             <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
-            <div className="flex flex-1 mt-3 relative w-[92%] sm:w-[30%] mx-auto pb-3">
-              <input onBlur={()=>setDropDownList(null)} ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
+
+            <div className="flex flex-1 mt-3 relative w-[95%] sm:w-[30%] mx-auto pb-3">
+              <input ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
                 className="py-2 px-1 sm:py-1.5 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-blue-200 outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
-                <button type="submit" className="text-[white]  bg-blue-500   duration-500 w-[70px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#acacac]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
+                <button type="submit" className="text-[white]  bg-blue-500   duration-500 w-[90px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#acacac]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
                 {dropDownList && dropDownList.length > 0 ?<ul className={`absolute h-[300px]
                  -bottom-[300px] overflow-y-auto z-50 left-0 right-0`}>
                   {dropDownList.map((val, index)=>{
@@ -103,7 +105,7 @@ export default function MainHomeComp (){
             <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
-            <ul className='flex gap-x-9 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
+            <ul className='flex gap-x-9 z-0 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
             <li onClick={() => SelectBrand("all")} className={`list-none font-bold block w-[500px] ${catName == 'all' ? 'text-blue-500' : "text-gray-600"}`}>
                         All
                     </li>

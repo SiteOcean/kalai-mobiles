@@ -1,23 +1,21 @@
-// Carousel.js
 import React from 'react';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import BufferedImage from './bufferImage';
 
-const MyCarousel = ({ images }) => {
+const ImageSlider = ({ images }) => {
   return (
-    <div className=''>
-        <AwesomeSlider
-        transitionDelay={100}
-        infinite={true}
-        organicArrows={true}
-        activityColor='red'
-        >
+    <Carousel 
+    showArrows={true}
+    showIndicators={true}
+    className='rounded-md h-[300px] sm:[400px]'>
       {images.map((image, index) => (
-        <div key={index} data-src={image} />
+        <div key={index}>
+        <BufferedImage imageBuffer={image} alt="Buffered Image" className="w-full rounded-md h-[300px] sm:h-[400px] object-fill" />
+        </div>
       ))}
-    </AwesomeSlider>
-    </div>
+    </Carousel>
   );
 };
 
-export default MyCarousel;
+export default ImageSlider;
