@@ -10,7 +10,6 @@ function HomePage() {
 
     try {
       const response = await axios.post('/api/mongodb/utilitiesDb', { username, city });
-      console.log('User created:', response.data);
     } catch (error) {
       console.error('Error creating user:', error);
     }

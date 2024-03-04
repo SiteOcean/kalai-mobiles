@@ -11,7 +11,6 @@ export const fetchAllProducts = async () => {
   const fetchWithTimeout = async () => {
     try {
       const response = await axios.get(backendPath+'getAllProducts');
-      console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -92,6 +91,19 @@ export const fetchParticularProduct= async(productId)=>{
   }
 }
 
+export const addProductService = async (item) => {
+  try {
+    const response = await axios.post(backendPath + 'addProduct', item);
+    if (response.status === 200) {
+      return true;
+    } else {
+      console.error('Failed to add product. Response:', response);
+    }
+  } catch (error) {
+    console.error('Error adding product:', error);
+  }
+};
+
 export const deleteProductById= async(priductId)=>{
 
   try{
@@ -128,7 +140,6 @@ export const signupService = async (userData) => {
     const response = await axios.post(backendPath + 'createAdmin', userData);
 
     if (response && response.status === 200) {
-      console.log(response)
       return response.data.message;
     } else {
       throw new Error('Error in signupService: Unexpected response status');

@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { categoryDataList } from '../api/config';
+import { addProductService } from '../api/service';
+import CustomLoader from '@/components/loader';
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
 let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 const AddProductForm = () => {
@@ -16,11 +18,10 @@ const AddProductForm = () => {
   const [category, setCategory] = useState('');
   const [images, setImages] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
-
+  const [isloading, setIsloading] = useState(false)
   const router = useRouter(null)
 
   const handleInputChange = (e, setter) => {
-    console.log(e.target.value)
     setter(e.target.value);
   };
 
@@ -80,7 +81,9 @@ const AddProductForm = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     if (validateForm()) {
+      setIsloading(true)
       try {
         const formData = new FormData();
         formData.append('name', name);
@@ -92,23 +95,25 @@ const AddProductForm = () => {
         formData.append('category', category);
         images.forEach((image) => formData.append('images', image));
         
-        const response = await axios.post(backendPath+'addProduct', formData);
-       
-
-        if (response.status == 200) {
-          router.back()
-        } else {
-          console.error('Failed to add product');
-        }
+        const response = await addProductService(formData);
+        if (response) {
+          setIsloading(false)
+          router.back('/admin/homepage')
+        } 
       } catch (error) {
+        alert("error")
         console.error('Error adding product:', error);
+      }
+      finally{
+        setIsloading(false)
       }
     }
   };
 
   return (
     <div className='w-full'>
-      <div className='bg-[#5582ff] flex items-center py-3 px-3 sm:px-12 gap-x-3 font-bold text-white text-[25px]'>
+      {isloading ? <div className='w-full'><CustomLoader/></div>:
+      <><div className='bg-[#5582ff] flex items-center py-3 px-3 sm:px-12 gap-x-3 font-bold text-white text-[25px]'>
                 <MdOutlineArrowBack className='cursor-pointer' onClick={()=>router.push('/admin/homepage')}/>
                  Add Product
       </div>
@@ -176,12 +181,12 @@ const AddProductForm = () => {
         )}
       </div>
       <div className="mb-2">
-        <label for="phoneSelect" className="block pb-1 text-gray-400 underline text-sm font-bold ">Select Category:</label>
+        <label htmlFor="phoneSelect" className="block pb-1 text-gray-400 underline text-sm font-bold ">Select Category:</label>
         
         <select onChange={(e) => handleInputChange(e, setCategory)} id="phoneSelect" name="phone" className={`w-full border ${validationErrors.category ? 'border-red-500' : 'border-gray-300'} p-2 rounded-md text-gray-500 capitalize focus:outline-none focus:border-blue-500`}>
         <option value="">Select Category</option>
-        {categoryDataList.map((val)=>{
-          return (<option value={val}>{val}</option>)
+        {categoryDataList.map((val, i)=>{
+          return (<option key={i} value={val}>{val}</option>)
         })}
         </select>
       </div>
@@ -245,7 +250,7 @@ const AddProductForm = () => {
       >
         Submit
       </button>
-    </form>
+    </form></>}
     </div>
   );
 };

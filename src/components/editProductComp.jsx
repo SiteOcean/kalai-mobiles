@@ -88,7 +88,6 @@ const EditProductComp = ({item, submitEdit}) => {
 
         if (response.status == 200) {
           submitEdit()
-          console.log('Product added successfully:');
         }
       } catch (error) {
         console.error('Error adding product:', error);

@@ -13,7 +13,7 @@ const WhatsappRedirect = ({  productName, productId, className }) => {
       : `Hi, ${productName}`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${123456}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${+918148140754}?text=${encodedMessage}`;
 
     try {
       window.open(whatsappUrl, '_blank');

@@ -131,28 +131,27 @@ export default function MainHomeComp (){
             <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
-            { products && products.length > 0 ? (<ul className='flex gap-x-9 z-0 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
+             <ul className='flex gap-x-9 z-0 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
                 <>
                 <li onClick={() => SelectBrand("all")} className={`capitalize list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-600"}`}>
                         All
                     </li>
-                {categoryDataList.map((val)=>{
-                    return (<li onClick={() => fetchDataByCategory(val)} className={`capitalize list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-600"}`}>
+                {categoryDataList.map((val,i)=>{
+                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-600"}`}>
                     {val}
                 </li>)
                 })}
             
                 
-                    {products.filter((cat, index, self) => self.findIndex((c) => c.brand === cat.brand) === index)
+            { products && products.length > 0 && products.filter((cat, index, self) => self.findIndex((c) => c.brand === cat.brand) === index)
                     .map((uniqueCat, i) => (
                         <CategoryList key={i} catName={catName} cat={uniqueCat.brand} SelectBrand={SelectBrand}/>
                     ))
                 }</>
-                </ul>) : <div className='text-gray-500 animate-ping font-semibold'>Sulur Service Center</div>}     
+                </ul>     
             </div>
 
            <div className='w-full'>
-            {console.log("test",hompageProducts)}
            {hompageProducts || hompageProducts !== null ? <>{ hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-3 p-3 sm:gap-5 sm:p-5'>
                  {hompageProducts.map((val,i)=>{
                     return <ProductCard key={i} val={val}/>
@@ -160,7 +159,9 @@ export default function MainHomeComp (){
             </div>:
              <div className='min-h-[50vh] grid items-center justify-center'>No Data...</div>}</>
              
-             : <div className='w-full'><CustomLoader/></div>}
+             : <div className='w-full min-h-[60vh] flex flex-col items-center justify-center'>
+              <div className='text-gray-500 animate-ping font-semibold'>Sulur Service Center</div> 
+              <CustomLoader/></div>}
            </div>
                 </>}
         </div>

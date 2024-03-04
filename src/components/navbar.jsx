@@ -9,6 +9,13 @@ import { MdMobileFriendly } from "react-icons/md";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter(null)
+
+  const handleBlur=()=>{
+    setTimeout(()=>{
+      setMenuOpen(false)
+    },100)
+   
+  }
   return (
     <nav className="bg-blue-500 py-4 pl-1 sm:p-4 z-50 sticky top-0">
       <div className={`w-[95%] mx-auto  sm:flex justify-between z-50 sm:gap-0 items-center `}>
@@ -24,7 +31,7 @@ const Navbar = () => {
         <div className="text-white flex items-center sm:hidden gap-x-4 absolute top-3 right-3">
         <Link href={'/offerZone'} className={`border-2 border-[yellow] text-center rounded-md p-1 text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}><MdLocalOffer className='animate-pulse text-[yellow] text-[16px]'/></Link>
 
-          <button onBlur={()=>setMenuOpen(false)}
+          <button onBlur={handleBlur}
             onClick={() => setMenuOpen(!menuOpen)}
             className=" focus:outline-none duration-500 text-[yellow] text-[30px]"
           >

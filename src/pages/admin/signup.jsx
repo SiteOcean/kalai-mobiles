@@ -57,7 +57,6 @@ const SignupForm = () => {
 
     try {
       const response = await signupService(adminUser);
-      console.log('User created:', response);
       if(response){
         alert("Admin Created Success!")
         router.replace('login');

@@ -12,7 +12,6 @@ export default function OffersComp (){
     return(
         <div className=''>
             <h1 className='text-[#575755] text-[32px] py-3 text-center animate-pulse'>Offer Zone</h1>
-            {offerItems && console.log(offerItems[0].products[0])}
            <div className='grid p-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-5 '>
            {offerItems && offerItems[0].products.map((val,i)=>{
 
