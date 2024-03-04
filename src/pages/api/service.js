@@ -1,6 +1,7 @@
 // File: api.js (or wherever you've defined your fetchAllProducts function)
 import axios from 'axios';
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+// NEXT_PUBLIC_BACKEND_URI
 let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 
 export const fetchAllProducts = async () => {
@@ -10,6 +11,7 @@ export const fetchAllProducts = async () => {
   const fetchWithTimeout = async () => {
     try {
       const response = await axios.get(backendPath+'getAllProducts');
+      console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -73,3 +75,67 @@ export const fetchAllProductsByCategory = async (category) => {
   
     return await fetchDataWithRetryCategory(); // Return the result of the retry function
   };
+
+
+export const fetchParticularProduct= async(productId)=>{
+
+  if(!productId)return;
+  try {
+    const response = await axios.post(backendPath+'getProductById',
+    {_id:productId});
+    if(response.status == 200){
+      return response.data;
+    }
+   
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+export const deleteProductById= async(priductId)=>{
+
+  try{
+    const response = await axios.post(backendPath+'deleteProductById', {_id:priductId});
+    if(response.status == 200){
+      return true
+    }
+   }
+   catch(err){
+    console.log(err)
+   }
+}
+
+export const loginService = async (user) => {
+  try {
+    const response = await axios.post(backendPath + 'adminLogin', {
+      username: user.username,
+      password: user.password,
+    });
+     
+    if (response && response.status == 200 && response.data && response.data.message === 'Login successful') {
+      return response.data.admin;
+    } else {
+      throw new Error('Login unsuccessful'); // You can customize the error message based on your needs
+    }
+  } catch (error) {
+    console.error('Error in loginService:', error.message);
+    throw error; // Rethrow the error to propagate it to the caller or handle it further if needed
+  }
+};
+
+export const signupService = async (userData) => {
+  try {
+    const response = await axios.post(backendPath + 'createAdmin', userData);
+
+    if (response && response.status === 200) {
+      console.log(response)
+      return response.data.message;
+    } else {
+      throw new Error('Error in signupService: Unexpected response status');
+    }
+  } catch (error) {
+    console.error('Error in signupService:', error.message);
+    throw error; // Rethrow the error to propagate it to the caller or handle it further if needed
+  }
+};
+

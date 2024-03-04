@@ -6,8 +6,10 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FaWhatsapp } from "react-icons/fa";
 import { MdCall } from "react-icons/md";
-
+// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 import { MdOutlineArrowBack } from "react-icons/md";
+import { fetchParticularProduct } from './api/service';
 
 export default function ViewProducts (){
 
@@ -33,17 +35,10 @@ export default function ViewProducts (){
 
     useEffect(()=>{
         const fetchData = async () => {
-          if(!productId)return;
-            try {
-              const response = await axios.post('http://localhost:3030/project/getProductById',
-              {_id:productId});
-              if(response.status == 200){
-                setPro(response.data);
-              }
-             
-            } catch (error) {
-              console.error('Error fetching data:', error);
-            }
+         let res = await fetchParticularProduct(productId)
+         if(res){
+          setPro(res)
+         }
           };
         fetchData();
     },[productId]);

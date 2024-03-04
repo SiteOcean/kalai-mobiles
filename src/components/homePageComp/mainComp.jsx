@@ -17,6 +17,7 @@ export default function MainHomeComp (){
     const [dropDownList, setDropDownList] = useState(null);
     const inputRef = useRef(null);
     const [placeHolder, setPlaceHolder] = useState('')
+    const [isVisible, setIsVisible] = useState(true);
 
     const fetchData = async () => {
         try {
@@ -47,6 +48,16 @@ export default function MainHomeComp (){
             setDropDownList(null)
             inputRef.current.blur();
     }
+
+    useEffect(() => {
+      const timeout = setTimeout(() => {
+        setIsVisible(false);
+      }, 500); // Set the duration in milliseconds (0.5 seconds)
+  
+      return () => {
+        clearTimeout(timeout);
+      };
+    }, []);
 
     const SearchFilter = (value) => {
         setPlaceHolder(value)
@@ -97,7 +108,10 @@ export default function MainHomeComp (){
     return(
         <div className='relative w-full'> 
             {/* <BannerSection/> */}
-
+          {isVisible ? <div className="splash-screen">
+        {/* Your splash screen content goes here */}
+        <h1>Welcome to My Website!</h1>
+      </div> :<> 
             <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
 
@@ -117,7 +131,7 @@ export default function MainHomeComp (){
             <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
-            {products && products.length > 0 ? (<ul className='flex gap-x-9 z-0 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
+            { products && products.length > 0 ? (<ul className='flex gap-x-9 z-0 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
                 <>
                 <li onClick={() => SelectBrand("all")} className={`capitalize list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-600"}`}>
                         All
@@ -134,19 +148,21 @@ export default function MainHomeComp (){
                         <CategoryList key={i} catName={catName} cat={uniqueCat.brand} SelectBrand={SelectBrand}/>
                     ))
                 }</>
-                </ul>) : <div className='text-gray-500 animate-ping font-semibold'>Sulur Service Center</div>}
-
-            
+                </ul>) : <div className='text-gray-500 animate-ping font-semibold'>Sulur Service Center</div>}     
             </div>
 
            <div className='w-full'>
-           {hompageProducts && hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-3 p-3 sm:gap-5 sm:p-5'>
+            {console.log("test",hompageProducts)}
+           {hompageProducts || hompageProducts !== null ? <>{ hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-3 p-3 sm:gap-5 sm:p-5'>
                  {hompageProducts.map((val,i)=>{
                     return <ProductCard key={i} val={val}/>
                 })} 
-            </div>: <div className='w-full'><CustomLoader/></div>}
+            </div>:
+             <div className='min-h-[50vh] grid items-center justify-center'>No Data...</div>}</>
+             
+             : <div className='w-full'><CustomLoader/></div>}
            </div>
-
+                </>}
         </div>
     )
 }

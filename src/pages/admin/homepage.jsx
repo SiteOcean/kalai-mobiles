@@ -7,6 +7,7 @@ import BufferedImage from '@/components/bufferImage';
 import EditProductComp from '@/components/editProductComp';
 let editItemData;
 import { MdEdit } from "react-icons/md";
+import { deleteProductById, fetchAllProducts } from '../api/service';
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
 let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 export default function AdminHomePage (){
@@ -26,8 +27,8 @@ export default function AdminHomePage (){
               if (confirmDelete) {
           
          try{
-          const response = await axios.post(backendPath+'deleteProductById', {_id:id});
-          if(response.status == 200){
+           const response = await deleteProductById(id)
+          if(response){
             setProducts(
               products.filter((val) => {
                 return val._id !== id;
@@ -42,11 +43,10 @@ export default function AdminHomePage (){
       };
       
     const fetchData = async () => {
-        try {
-          const response = await axios.get(backendPath+'getAllProducts');
-          if(response.status == 200){
-            setProducts(response.data)
-          }
+        
+           try {
+          const response = await fetchAllProducts();
+          setProducts(response);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -64,7 +64,7 @@ export default function AdminHomePage (){
     return(
       <div className='relative w-full'>
            <AdminNavbar/>
-           {products && products.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 p-5'>
+           {products ? <> {products.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 p-5'>
                  {products.map((val,i)=>{
                     return  <div key={i} className="max-w-sm rounded relative overflow-hidden shadow-lg bg-white">
                      <BufferedImage imageBuffer={val.images[0]} alt="Buffered Image" className="w-full h-[300px] object-fill" />
@@ -88,11 +88,11 @@ export default function AdminHomePage (){
                     </div>
                   </div>
                 })} 
-            </div>: <CustomLoader/>}
+            </div>: <div className='min-h-[50vh] grid items-center justify-center'>No Data...</div>}
 
             {editState ? <div className='absolute p-3 top-0 right-0 left-0 bg-gray-300 opacity-95'>
              <EditProductComp submitEdit={submitEdit} item={editItemData}/> 
-            </div>: null}
+            </div>: null}</> : <CustomLoader/>}
     </div>
     )
 };
