@@ -9,8 +9,9 @@ export function useSiteDataContext() {
 export function SiteDataProvider({ children }) {
 
     const [hompageProducts, setHomePageProducts] = useState(null)
-
-    return (<SiteDataContext.Provider value={{hompageProducts, setHomePageProducts}}>
+    const [splashScreen, setSplashScreen] = useState(false)
+    return (<SiteDataContext.Provider value={{hompageProducts, setHomePageProducts,
+      splashScreen, setSplashScreen}}>
         {children}
     </SiteDataContext.Provider>)
 }

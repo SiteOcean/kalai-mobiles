@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BannerSection from './banner';
 import CategoryList from './categoryList';
+import { TypeAnimation } from 'react-type-animation';
+
 
 import { FaSearch, FaWhatsapp } from "react-icons/fa";
 import ProductCard from './productsCard';
@@ -10,20 +12,25 @@ import { fetchAllProducts, fetchAllProductsByCategory } from '@/pages/api/servic
 import { categoryDataList } from '@/pages/api/config';
 let products = null;
 let catName = 'all';
-
 export default function MainHomeComp (){
 
-    const {hompageProducts, setHomePageProducts} = useSiteDataContext();
+    const {hompageProducts, setHomePageProducts,splashScreen,setSplashScreen
+    } = useSiteDataContext();
     const [dropDownList, setDropDownList] = useState(null);
     const inputRef = useRef(null);
     const [placeHolder, setPlaceHolder] = useState('')
-    const [isVisible, setIsVisible] = useState(true);
 
     const fetchData = async () => {
         try {
           const response = await fetchAllProducts();
           setHomePageProducts(response);
           products = response;
+          
+          if(!splashScreen){
+            setTimeout(()=>{
+              setSplashScreen(true);
+            },2500)
+          }   
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -37,7 +44,10 @@ export default function MainHomeComp (){
     const SelectBrand=(cat)=>{
         catName = cat.toLowerCase();
         if(cat === "all"){
-            fetchData() 
+          setHomePageProducts(null);
+          products=null;
+          fetchData();
+          return;
         }
         setHomePageProducts(
                 products.filter((val,i)=>{
@@ -49,15 +59,7 @@ export default function MainHomeComp (){
             inputRef.current.blur();
     }
 
-    useEffect(() => {
-      const timeout = setTimeout(() => {
-        setIsVisible(false);
-      }, 500); // Set the duration in milliseconds (0.5 seconds)
-  
-      return () => {
-        clearTimeout(timeout);
-      };
-    }, []);
+   
 
     const SearchFilter = (value) => {
         setPlaceHolder(value)
@@ -79,6 +81,7 @@ export default function MainHomeComp (){
     const fetchDataByCategory = async (category) => {
         try {
             catName=category
+            setPlaceHolder('');
             setHomePageProducts(null)
             products = null;
           const response = await fetchAllProductsByCategory(category);
@@ -108,9 +111,27 @@ export default function MainHomeComp (){
     return(
         <div className='relative w-full'> 
             {/* <BannerSection/> */}
-          {isVisible ? <div className="splash-screen">
+            {!splashScreen ? <div className="h-[80vh] sm:h-[90vh] flex justify-center items-center">
         {/* Your splash screen content goes here */}
-        <h1>Welcome to My Website!</h1>
+        <h1 className=''></h1>
+        <TypeAnimation
+      sequence={[
+        // Same substring at the start will only be typed out once, initially
+        'Welcome to Sulur Service Center!',
+        // 500, // wait 1s before replacing "Mice" with "Hamsters"
+        // 'We produce food for Hamsters',
+        // 1000,
+        // 'We produce food for Guinea Pigs',
+        // 1000,
+        // 'We produce food for Chinchillas',
+        // 1000
+      ]}
+      wrapper="span"
+      className='text-pink-500 font-bold text-[30px] animate-bounce'
+      speed={30}
+      style={{ fontSize: '2em', display: 'inline-block' }}
+      // repeat={}
+    />
       </div> :<> 
             <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
