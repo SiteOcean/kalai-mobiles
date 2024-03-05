@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import BannerSection from './banner';
 import CategoryList from './categoryList';
-import { TypeAnimation } from 'react-type-animation';
 
 
 import { FaSearch, FaWhatsapp } from "react-icons/fa";
@@ -22,15 +21,16 @@ export default function MainHomeComp (){
 
     const fetchData = async () => {
         try {
+          if(!splashScreen){
+            setTimeout(()=>{
+              setSplashScreen(true);
+            },5000)
+          } 
           const response = await fetchAllProducts();
           setHomePageProducts(response);
           products = response;
           
-          if(!splashScreen){
-            setTimeout(()=>{
-              setSplashScreen(true);
-            },2500)
-          }   
+           
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -81,7 +81,7 @@ export default function MainHomeComp (){
     const fetchDataByCategory = async (category) => {
         try {
             catName=category
-            setPlaceHolder('');
+            setPlaceHolder('')
             setHomePageProducts(null)
             products = null;
           const response = await fetchAllProductsByCategory(category);
@@ -111,27 +111,8 @@ export default function MainHomeComp (){
     return(
         <div className='relative w-full'> 
             {/* <BannerSection/> */}
-            {!splashScreen ? <div className="h-[80vh] sm:h-[90vh] flex justify-center items-center">
-        {/* Your splash screen content goes here */}
-        <h1 className=''></h1>
-        <TypeAnimation
-      sequence={[
-        // Same substring at the start will only be typed out once, initially
-        'Welcome to Sulur Service Center!',
-        // 500, // wait 1s before replacing "Mice" with "Hamsters"
-        // 'We produce food for Hamsters',
-        // 1000,
-        // 'We produce food for Guinea Pigs',
-        // 1000,
-        // 'We produce food for Chinchillas',
-        // 1000
-      ]}
-      wrapper="span"
-      className='text-pink-500 font-bold text-[30px] animate-bounce'
-      speed={30}
-      style={{ fontSize: '2em', display: 'inline-block' }}
-      // repeat={}
-    />
+            {!splashScreen ? <div className="w-full flex justify-center items-center">     
+            <BannerSection/>   
       </div> :<> 
             <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
@@ -152,13 +133,13 @@ export default function MainHomeComp (){
             <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
-             <ul className='flex gap-x-9 z-0 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
+             <ul className='flex gap-x-9 z-0 pb-3 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
                 <>
-                <li onClick={() => SelectBrand("all")} className={`capitalize list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-600"}`}>
+                <li onClick={() => SelectBrand("all")} className={`capitalize list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-400"}`}>
                         All
                     </li>
                 {categoryDataList.map((val,i)=>{
-                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-600"}`}>
+                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-500"}`}>
                     {val}
                 </li>)
                 })}

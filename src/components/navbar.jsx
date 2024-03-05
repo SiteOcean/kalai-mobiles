@@ -29,7 +29,10 @@ const Navbar = () => {
 
         {/* Hamburger Icon for Mobile */}
         <div className="text-white flex items-center sm:hidden gap-x-4 absolute top-3 right-3">
-        <Link href={'/offerZone'} className={`border-2 border-[yellow] text-center rounded-md p-1 text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}><MdLocalOffer className='animate-pulse text-[yellow] text-[16px]'/></Link>
+        <Link href={'/offerZone'} className={`border-2 border-[yellow] text-center rounded-md p-1 text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}>
+          <MdLocalOffer className='text-[yellow] text-[16px]'/>
+          <span className='w-1 h-1 rounded-full bg-[yellow] animate-pulse absolute -top-0.5 -right-0.5'></span>
+          </Link>
 
           <button onBlur={handleBlur}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -58,7 +61,7 @@ const Navbar = () => {
             <Link href="/service" className={`${router.pathname === "/service" ? "text-blue-100 underline underline-offset-4" :""}`}>
               Service
             </Link>
-            <Link href={'/offerZone'} className={`text-[20px] flex items-center justify-center gap-x-2 pt-1  text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :" animate-bounce"}`}>Offer<MdOutlineLocalOffer className='absolute top-0 -right-4'/></Link>
+            <Link href={'/offerZone'} className={`text-[20px] flex items-center justify-center gap-x-2 pt-1  text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4 font-semibold text-md" :" animate-bounce"}`}>Offer<MdOutlineLocalOffer className='absolute animate-ping top-0 -right-4'/></Link>
           </div>
         </div>
 

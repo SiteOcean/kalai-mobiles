@@ -1,13 +1,14 @@
 // pages/about.js
 
 import React from 'react';
+import AosFunction from '../aos';
 
 const AboutComp= () => {
   return (
-    <div>
+    <AosFunction>
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between mt-4 md:p-8">
       <div className="w-full md:w-1/2 mb-4 md:mb-0 p-1 sm:p-6 rounded-md shadow-md">
-        <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
+        <img data-aos="flip-right" src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
       </div>
 
       <div className="md:w-1/2 md:ml-4">
@@ -20,7 +21,7 @@ const AboutComp= () => {
 
     <div className="flex flex-col md:flex-row-reverse items-center md:items-start justify-center md:justify-between mt-4 md:p-8">
       <div className="w-full md:w-1/2 mb-4 md:mb-0 p-1 sm:p-6 rounded-md shadow-md">
-        <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
+        <img data-aos="zoom-in-left" src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
       </div>
 
       <div className="md:w-1/2 md:ml-4">
@@ -32,7 +33,7 @@ const AboutComp= () => {
     </div>
     <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between mt-4 md:p-8">
       <div className="w-full md:w-1/2 mb-4 md:mb-0 p-1 sm:p-6 rounded-md shadow-md">
-        <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
+        <img data-aos="zoom-in-right" src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
       </div>
 
       <div className="md:w-1/2 md:ml-4">
@@ -44,7 +45,7 @@ const AboutComp= () => {
     </div>
     <div className="flex flex-col md:flex-row-reverse items-center md:items-start justify-center md:justify-between mt-4 md:p-8">
       <div className="w-full md:w-1/2 mb-4 md:mb-0 p-1 sm:p-6 rounded-md shadow-md">
-        <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
+        <img data-aos="zoom-in-left" src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
       </div>
 
       <div className="md:w-1/2 md:ml-4">
@@ -55,7 +56,7 @@ const AboutComp= () => {
       </div>
     </div>
 
-    </div>
+    </AosFunction>
   );
 };
 
