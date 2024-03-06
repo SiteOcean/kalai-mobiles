@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className="text-white flex items-center sm:hidden gap-x-4 absolute top-3 right-3">
         <Link href={'/offerZone'} className={`border-2 border-[yellow] text-center rounded-md p-1 text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4" :""}`}>
           <MdLocalOffer className='text-[yellow] text-[16px]'/>
-          <span className='w-1 h-1 rounded-full bg-[yellow] animate-pulse absolute -top-0.5 -right-0.5'></span>
+          <span className='w-2 h-2 rounded-full bg-[yellow] animate-pulse absolute -top-1 -right-1'></span>
           </Link>
 
           <button onBlur={handleBlur}

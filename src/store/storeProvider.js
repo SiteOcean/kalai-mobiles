@@ -10,8 +10,11 @@ export function SiteDataProvider({ children }) {
 
     const [hompageProducts, setHomePageProducts] = useState(null)
     const [splashScreen, setSplashScreen] = useState(false)
+
+    const [offerItems, setOfferItems] = useState(null)
+
     return (<SiteDataContext.Provider value={{hompageProducts, setHomePageProducts,
-      splashScreen, setSplashScreen}}>
+      splashScreen, setSplashScreen, offerItems, setOfferItems}}>
         {children}
     </SiteDataContext.Provider>)
 }

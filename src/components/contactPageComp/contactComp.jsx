@@ -7,8 +7,8 @@ const ContactComp = () => {
 
   const handleLocation=() => {
     // Replace with your desired latitude and longitude
-    const lat = '11.02427000';
-    const lng = '77.12565000';
+    const lat = '11.025304819016323';
+    const lng = '77.12165293830378';
 
     // Redirect to Google Maps with the specified lat/lng
     window.location.href = `https://www.google.com/maps?q=${lat},${lng}`;

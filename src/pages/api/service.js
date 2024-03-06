@@ -10,7 +10,7 @@ export const fetchAllProducts = async () => {
     
   const fetchWithTimeout = async () => {
     try {
-      const response = await axios.get(backendPath+'getAllProducts');
+      const response = await axios.get(backendPath+"getAllProducts");
       return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -37,6 +37,41 @@ export const fetchAllProducts = async () => {
   };
 
   return await fetchDataWithRetry(); // Return the result of the retry function
+};
+
+export const fetchAllOffers = async () => {
+  let maxRetries = 3;
+  let currentRetry = 0;
+    
+  const fetchWithTimeoutOffers = async () => {
+    try {
+      const response = await axios.get(backendPath+"getAllOffers");
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error; // Rethrow the error for retry mechanism
+    }
+  };
+
+  const fetchDataWithRetryOffers = async () => {
+    while (currentRetry < maxRetries) {
+      try {
+        const data = await Promise.race([
+          fetchWithTimeoutOffers(),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 30000))
+        ]);
+
+        return data; // Return the data on successful response
+      } catch (error) {
+        console.error(`Error fetching data (retry ${currentRetry + 1}/${maxRetries}):`, error);
+        currentRetry += 1;
+      }
+    }
+
+    throw new Error('Max retries reached'); // Throw an error if maxRetries is reached without success
+  };
+
+  return await fetchDataWithRetryOffers(); // Return the result of the retry function
 };
 
 export const fetchAllProductsByCategory = async (category) => {
@@ -76,11 +111,11 @@ export const fetchAllProductsByCategory = async (category) => {
   };
 
 
-export const fetchParticularProduct= async(productId)=>{
+export const fetchParticularProduct= async(productId, path)=>{
 
   if(!productId)return;
   try {
-    const response = await axios.post(backendPath+'getProductById',
+    const response = await axios.post(backendPath + path,
     {_id:productId});
     if(response.status == 200){
       return response.data;
@@ -91,9 +126,9 @@ export const fetchParticularProduct= async(productId)=>{
   }
 }
 
-export const addProductService = async (item) => {
+export const addItems = async (item, path) => {
   try {
-    const response = await axios.post(backendPath + 'addProduct', item);
+    const response = await axios.post(backendPath + path, item);
     if (response.status === 200) {
       return true;
     } else {
@@ -104,10 +139,10 @@ export const addProductService = async (item) => {
   }
 };
 
-export const deleteProductById= async(priductId)=>{
+export const deleteProductById= async(priductId, path)=>{
 
   try{
-    const response = await axios.post(backendPath+'deleteProductById', {_id:priductId});
+    const response = await axios.post(backendPath + path, {_id:priductId});
     if(response.status == 200){
       return true
     }
@@ -150,3 +185,15 @@ export const signupService = async (userData) => {
   }
 };
 
+export const editItem = async (item, path) => {
+  try {
+    const response = await axios.post(backendPath + path, item);
+    if (response.status === 200) {
+      return true;
+    } else {
+      console.error('Failed to add product. Response:', response);
+    }
+  } catch (error) {
+    console.error('Error adding product:', error);
+  }
+};

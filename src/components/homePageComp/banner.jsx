@@ -25,7 +25,7 @@ export default function BannerSection (){
       ]}
       wrapper="span"
       className='text-transparent bg-clip-text bg-gradient-to-r from-[#ffffff] to-[#fdff87]  px-2 font-bold text-center text-[30px] mt-3 rounded-md animate-bounce'
-      speed={30}
+      speed={20}
       style={{ fontSize: '2em', display: 'inline-block' }}
     
     />

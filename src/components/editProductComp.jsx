@@ -3,9 +3,9 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { MdClose } from "react-icons/md";
-// NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
-let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
-const EditProductComp = ({item, submitEdit}) => {
+import { editItem } from '@/pages/api/service';
+import CustomLoader from './loader';
+const EditProductComp = ({item, submitEdit, pathName}) => {
 
 
     if(!item){
@@ -19,7 +19,7 @@ const EditProductComp = ({item, submitEdit}) => {
   const [offer, setProductOffer] = useState(item.offer);
   const [images, setImages] = useState(item.images);
   const [validationErrors, setValidationErrors] = useState({});
-
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter(null)
   const handleInputChange = (e, setter) => {
     setter(e.target.value);
@@ -67,10 +67,10 @@ const EditProductComp = ({item, submitEdit}) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
     if(!item || !item._id) return;
     if (validateForm()) {
       try {
+        setIsLoading(true)
         const formData = new FormData();
         formData.append('name', name);
         formData.append('title', title);
@@ -83,11 +83,10 @@ const EditProductComp = ({item, submitEdit}) => {
             images.forEach((image) => formData.append('images', image));
         }
         
-        const response = await axios.post(backendPath+'updateProductById', formData);
-       
-
-        if (response.status == 200) {
+        const response = await editItem(formData, pathName);
+          if (response) {
           submitEdit()
+          setIsLoading(false)
         }
       } catch (error) {
         console.error('Error adding product:', error);
@@ -98,7 +97,7 @@ const EditProductComp = ({item, submitEdit}) => {
   return (
     <div className='w-full'>
       
-      <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-2 my-12 bg-white relative rounded shadow-md">
+      {!isLoading ? <form onSubmit={handleFormSubmit} className="max-w-md mx-auto p-2 my-12 bg-white relative rounded shadow-md">
         <MdClose onClick={submitEdit} className='text-red-500 border p-1 rounded font-bold text-[37px]
         absolute top-0 right-0'/>
       <h1 className='py-2 text-blue-500 text-center font-bold uppercase'>Edit Product</h1>
@@ -227,7 +226,7 @@ const EditProductComp = ({item, submitEdit}) => {
         Submit
       </button>
       </div>
-    </form>
+    </form> : <div><CustomLoader/></div>}
     </div>
   );
 };

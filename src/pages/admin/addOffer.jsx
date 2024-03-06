@@ -13,6 +13,7 @@ const AddProductForm = () => {
   const [name, setProductName] = useState('');
   const [title, setProductTitle] = useState('');
   const [description, setProductDescription] = useState('');
+  const [whatSpecial, setwhatSpecial] = useState('');
   const [brand, setProductBrand] = useState('');
   const [price, setProductPrice] = useState('');
   const [offer, setProductOffer] = useState('');
@@ -26,10 +27,17 @@ const AddProductForm = () => {
     setter(e.target.value);
   };
 
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    
+    setImages(files);
+  };
+
   const resetStateValue=()=>{
     setProductName('')
     setProductTitle('')
     setProductDescription('')
+    setwhatSpecial('')
     setProductBrand('')
     setProductPrice('')
     setProductOffer('')
@@ -38,11 +46,6 @@ const AddProductForm = () => {
     setValidationErrors({})
     setCategory('')
   }
-
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages(files);
-  };
 
   const validateForm = () => {
     const errors = {};
@@ -53,6 +56,9 @@ const AddProductForm = () => {
 
     if (!title.trim()) {
       errors.title = 'Product Title is required';
+    }
+    if(!whatSpecial.trim()){
+        errors.whatSpecial = "what's special required"
     }
 
     if (!description.trim()) {
@@ -106,14 +112,15 @@ const AddProductForm = () => {
         formData.append('brand', brand);
         formData.append('price', price);
         formData.append('offer', offer);
+        formData.append('whatSpecial', whatSpecial);
         formData.append('category', category);
         images.forEach((image) => formData.append('images', image));
         
-        const response = await addItems(formData, "addProduct");
+        const response = await addItems(formData, "addOffer");
         if (response) {
-          resetStateValue()
-          alert("Successfully added the product.");
-          setIsloading(false)
+            resetStateValue()
+            alert("Successfully added the item to the offer.");
+            setIsloading(false)
         } 
       } catch (error) {
         alert("error")
@@ -129,13 +136,14 @@ const AddProductForm = () => {
     <div className='w-full'>
       {isloading ? <div className='w-full h-[60vh] flex justify-center items-center'><CustomLoader/></div>:
       <>
-       <AdminNavbar/>
+      <AdminNavbar/>
       <div className='w-[92%] mx-auto'>
-      <form onSubmit={handleFormSubmit} className="max-w-md flex flex-col mx-auto px-2 pb-4 my-12 bg-white rounded shadow-md">
-      <h1 className='py-2 text-blue-500 text-center font-bold uppercase'>Add Product</h1>
+      <form onSubmit={handleFormSubmit} className="max-w-md mx-auto flex flex-col px-2 pb-5  my-12 relative bg-white rounded shadow-md">
+        <span className='absolute top-0 right-0 animate-pulse text-[#ffff4f] font-semibold px-2 py-1  rounded'>Offer</span>
+      <h1 className='py-2 text-blue-500 text-center font-bold uppercase'>Add Offer</h1>
       <div className="mb-2">
         <label className="block text-gray-400 underline text-sm font-bold " htmlFor="productName">
-          Product Name:
+          Item Name:
         </label>
         <input
           className={`w-full border ${validationErrors.name ? 'border-red-500' : 'border-gray-300'} p-2 rounded-md focus:outline-none focus:border-blue-500`}
@@ -162,6 +170,22 @@ const AddProductForm = () => {
         />
         {validationErrors.title && (
           <span className="text-red-500 text-sm">{validationErrors.title}</span>
+        )}
+      </div>
+
+      <div className="mb-2">
+        <label className="block text-gray-400 underline text-sm font-bold " htmlFor="productTitle">
+          What Special:
+        </label>
+        <input
+          className={`w-full border ${validationErrors.whatSpecial ? 'border-red-500' : 'border-gray-300'} p-2 rounded-md focus:outline-none focus:border-blue-500`}
+          type="text"
+          id="productTitle"
+          value={whatSpecial}
+          onChange={(e) => handleInputChange(e, setwhatSpecial)}
+        />
+        {validationErrors.title && (
+          <span className="text-red-500 text-sm">{validationErrors.whatSpecial}</span>
         )}
       </div>
 
@@ -259,14 +283,13 @@ const AddProductForm = () => {
       </div>
 
       <button
-        className="bg-blue-500 text-white p-2 mt-3 rounded-md hover:bg-blue-600 focus:outline-none"
+        className="bg-blue-500 text-white mt-3 p-2 rounded-md hover:bg-blue-600 focus:outline-none"
         type="submit"
       >
         Submit
       </button>
     </form>
-      </div>
-    </>}
+        </div></>}
     </div>
   );
 };

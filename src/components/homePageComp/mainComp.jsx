@@ -26,7 +26,7 @@ export default function MainHomeComp (){
               setSplashScreen(true);
             },5000)
           } 
-          const response = await fetchAllProducts();
+          const response = await fetchAllProducts("getAllProducts");
           setHomePageProducts(response);
           products = response;
           
@@ -133,13 +133,13 @@ export default function MainHomeComp (){
             <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
 
            
-             <ul className='flex gap-x-9 z-0 pb-3 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
+             <ul className='flex gap-x-4 sm:gap-x-9 z-0 pb-3.5 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
                 <>
-                <li onClick={() => SelectBrand("all")} className={`capitalize list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-400"}`}>
+                <li onClick={() => SelectBrand("all")} className={`capitalize border p-1 rounded-lg list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-400"}`}>
                         All
                     </li>
                 {categoryDataList.map((val,i)=>{
-                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-500"}`}>
+                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize border p-1 rounded-lg list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-500"}`}>
                     {val}
                 </li>)
                 })}

@@ -27,7 +27,7 @@ const ProductCard = ({ val }) => {
         <span className='text-[10px] text-gray-400 ml-1 '>Rs</span> {val.price}
         </span>
       </div>
-      <span className='absolute top-0 right-0 bg-[yellow] p-2 rounded-sm'>{val.offer}%</span>
+      <span className='absolute top-0 right-0 font-semibold text-gray-500 bg-[yellow] p-2 rounded-sm'>{val.offer}%</span>
     </div>
   );
 };

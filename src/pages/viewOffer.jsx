@@ -12,7 +12,7 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { fetchParticularProduct } from './api/service';
 import CustomLoader from '@/components/loader';
 
-export default function ViewProductsMain (){
+export default function ViewOfferMain(){
 
     const router = useRouter(null)
     const productId = router.query.id;
@@ -36,7 +36,7 @@ export default function ViewProductsMain (){
 
     useEffect(()=>{
         const fetchData = async () => {
-         let res = await fetchParticularProduct(productId,"getProductById")
+         let res = await fetchParticularProduct(productId,"getOfferById")
          if(res){
           setPro(res)
          }
@@ -53,9 +53,10 @@ export default function ViewProductsMain (){
       <div className='flex-1 mt-2 sm:mt-0 sm:gap-y-2 pl-3 pt-2 space-y-1 flex md:justify-center flex-col'>
       <h1 className='font-bold text-blue-500 text-xl'>{pro.name}</h1>
       <p ><span className='font-bold'>Category:</span> {pro.title}</p>
+      <p>{pro.whatSpecial}</p>
       {/* <p><span className='font-bold'>Description: </span>{pro.description}</p> */}
       <DescriptionReadmore description={pro.description}/>
-      <p><span className='font-bold'>Discount: </span>{pro.discountPercentage}%</p>
+      <p><span className='font-bold'>Discount: </span>{pro.offer}%</p>
       <p><span className='font-bold'>Price: $</span>{pro.price}</p>
       {/* <p><span className='font-bold'>Rating:</span> {pro.rating}</p> */}
       <p><span className='font-bold'>Stock: </span>{pro.stock}</p>
