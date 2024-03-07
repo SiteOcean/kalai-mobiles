@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { LuMenuSquare } from "react-icons/lu";
 import { useRouter } from 'next/router';
@@ -9,18 +9,40 @@ import { MdMobileFriendly } from "react-icons/md";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter(null)
+  const [storedValue, setStoredValue] = useState(null);
 
   const handleBlur=()=>{
     setTimeout(()=>{
       setMenuOpen(false)
     },100)
-   
   }
+
+
+    
+    
+  // Function to get a value from local storage
+  const getValueFromLocalStorage = () => {
+    const storedValue = localStorage.getItem('token');
+    if (storedValue) {
+        setStoredValue(storedValue)
+    }
+  };
+
+
+
+  const handleLogout=()=>{
+    localStorage.removeItem('token');
+    router.replace('/')
+  }
+
+  useEffect(() => {
+    getValueFromLocalStorage();
+  }, []);
   return (
     <nav className="bg-blue-500 py-4 pl-1 sm:p-4 z-50 sticky top-0">
       <div className={`w-[95%] mx-auto  sm:flex justify-between z-50 sm:gap-0 items-center `}>
         {/* Brand/Logo */}
-        <div className="text-[yellow] flex items-center gap-x-2 font-bold text-lg sm:text-2xl">
+        <div className="text-[yellow] flex items-center gap-x-2 font-bold text-lg lg:text-2xl">
         
           <Link href="/">
            Sulur Service Center
@@ -61,7 +83,11 @@ const Navbar = () => {
             <Link href="/service" className={`${router.pathname === "/service" ? "text-blue-100 underline underline-offset-4" :""}`}>
               Service
             </Link>
+            {storedValue ? <button onClick={handleLogout} className={``}>
+              Logout
+            </button> : null}
             <Link href={'/offerZone'} className={`text-[20px] flex items-center justify-center gap-x-2 pt-1  text-[yellow] relative ${router.pathname === "/offerZone" ? "underline underline-offset-4 font-semibold text-md" :" animate-bounce"}`}>Offer<MdOutlineLocalOffer className='absolute animate-ping top-0 -right-4'/></Link>
+           
           </div>
         </div>
 
@@ -79,6 +105,9 @@ const Navbar = () => {
             <Link href="/service" className={`${router.pathname === "/service" ? " underline underline-offset-4" :""}`}>
               Services
             </Link>
+           {storedValue ? <button className={``}>
+              Logout
+            </button> : null}
           </div>
         </div>
       </div>

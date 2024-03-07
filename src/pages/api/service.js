@@ -160,6 +160,9 @@ export const loginService = async (user) => {
     });
      
     if (response && response.status == 200 && response.data && response.data.message === 'Login successful') {
+     
+        localStorage.setItem('token', response.data.admin._id);
+       
       return response.data.admin;
     } else {
       throw new Error('Login unsuccessful'); // You can customize the error message based on your needs

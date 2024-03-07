@@ -7,6 +7,7 @@ import { categoryDataList } from '../api/config';
 import { addItems } from '../api/service';
 import CustomLoader from '@/components/loader';
 import AdminNavbar from './navbar';
+import LoginAuth from '@/components/loginAuth';
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
 let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
 const AddProductForm = () => {
@@ -132,7 +133,7 @@ const AddProductForm = () => {
     }
   };
 
-  return (
+  return (<LoginAuth>
     <div className='w-full'>
       {isloading ? <div className='w-full h-[60vh] flex justify-center items-center'><CustomLoader/></div>:
       <>
@@ -291,6 +292,7 @@ const AddProductForm = () => {
     </form>
         </div></>}
     </div>
+    </LoginAuth>
   );
 };
 

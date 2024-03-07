@@ -12,6 +12,7 @@ import CustomLoader from '@/components/loader';
 import { fetchParticularProduct } from '../api/service';
 
 import EditProductComp from '@/components/editProductComp';
+import LoginAuth from '@/components/loginAuth';
 let editItemData;
 
 
@@ -61,7 +62,7 @@ export default function OfferView (){
     //     setEditState(false)
     //   }
 
-    return(
+    return(<LoginAuth>
         <div>
            {/* {!editState ? <> */}
             <div className='bg-[#5582ff] flex justify-between items-center py-3 px-3 sm:px-12 gap-x-3 font-bold text-white'>
@@ -92,5 +93,6 @@ export default function OfferView (){
              <EditProductComp itemPath={'updateProductById'} submitEdit={submitEdit} item={editItemData}/> 
             </div>} */}
           </div>
+          </LoginAuth>
     )
 }

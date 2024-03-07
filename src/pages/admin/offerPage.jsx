@@ -8,6 +8,7 @@ let editItemData;
 import { MdEdit } from "react-icons/md";
 import { deleteProductById, fetchAllOffers } from '../api/service';
 import { useRouter } from 'next/router';
+import LoginAuth from '@/components/loginAuth';
 
 export default function AdminOfferPage (){
 
@@ -66,7 +67,7 @@ export default function AdminOfferPage (){
     useEffect(()=>{
         fetchData();
     },[]);
-    return(
+    return(<LoginAuth>
       <div className='relative w-full'>
            <AdminNavbar/>
            {products ? <> {products.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 p-5'>
@@ -101,5 +102,6 @@ export default function AdminOfferPage (){
             </div>: null} */}
             </> : <CustomLoader/>}
     </div>
+    </LoginAuth>
     )
 };

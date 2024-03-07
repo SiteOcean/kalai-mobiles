@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { signupService } from '../api/service';
+import LoginAuth from '@/components/loginAuth';
 
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
 let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
@@ -66,7 +67,7 @@ const SignupForm = () => {
     }
   };
 
-  return (
+  return (<LoginAuth>
     <div className="flex h-screen items-center justify-center">
       <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Signup</h2>
@@ -177,6 +178,7 @@ const SignupForm = () => {
         </form>
       </div>
     </div>
+    </LoginAuth>
   );
 };
 

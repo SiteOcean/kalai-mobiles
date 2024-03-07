@@ -56,7 +56,7 @@ export default function MainHomeComp (){
             )
             setPlaceHolder(cat)
             setDropDownList(null)
-            inputRef.current.blur();
+            
     }
 
    
@@ -117,7 +117,7 @@ export default function MainHomeComp (){
             <button onClick={redirectToWhatsApp} className=' bg-[#42fd42] fixed bottom-2 sm:bottom-4 animate-bounce right-5 sm:right-4  w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] p-2 rounded-full flex justify-center items-center'><FaWhatsapp className='text-white font-bold text-[32px] sm:text-[35px] text-center self-center'/></button>
 
 
-            <div className="flex flex-1 mt-3 relative w-[95%] sm:w-[30%] mx-auto pb-3">
+            {/* <div className="flex flex-1 mt-3 relative w-[95%] sm:w-[30%] mx-auto pb-3">
               <input ref={inputRef} id={"searchbar"} type="text" value={placeHolder} placeholder={"Search"}
                 className="py-2 px-1 sm:py-1.5 bg-white sm:p-2 pl-3 text-[15px] sm:pl-3 border-y-2 border-l-2 border-blue-200 outline-none  rounded-bl-full rounded-tl-full w-full" onChange={(e)=>SearchFilter(e.target.value)}/>
                 <button type="submit" className="text-[white]  bg-blue-500   duration-500 w-[90px] sm:w-[100px] font-semibold text-center rounded-br-full rounded-tr-full rounde sm:hover:bg-[#9393ff]"><span  className="hidden sm:block">Search</span><FaSearch  className="sm:hidden mx-auto"/></button>
@@ -127,10 +127,10 @@ export default function MainHomeComp (){
                     return <li key={index+"fil"} onClick={()=>SelectBrand(val)} className="text-[#242323] text-[19px] font-bold bg-white p-3 capitalize hover:text-[#838383] cursor-pointer border-b border-[#e7e7e7]">{val}</li>
                   }) }
                 </ul>: null}
-                </div>
+                </div> */}
             
             {/* <h1 className='text-center font-bold text-[28px] text-gray-500 py-2'>Select Category</h1> */}
-            <div className='flex gap-x-3 overflow-auto w-full justify-center items-center'>
+            <div className='flex gap-x-3 sticky top-[58px] sm:top-[65px] md:top-[65px] lg:top-[65px] bg-white overflow-auto w-full justify-center items-center pt-3'>
 
            
              <ul className='flex gap-x-4 sm:gap-x-9 z-0 pb-3.5 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
@@ -153,7 +153,7 @@ export default function MainHomeComp (){
                 </ul>     
             </div>
 
-           <div className='w-full min-h-[52vh]'>
+           <div className='w-full min-h-[52vh] sm:min-h-[64vh]'>
            {hompageProducts || hompageProducts !== null ? <>{ hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-3 p-3 sm:gap-5 sm:p-5'>
                  {hompageProducts.map((val,i)=>{
                     return <ProductCard key={i} val={val}/>
