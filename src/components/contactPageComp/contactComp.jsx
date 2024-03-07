@@ -19,6 +19,21 @@ const ContactComp = () => {
     <div>
        <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between sm:p-4 md:p-8">
       {/* Left side (Image) */}
+      {/* <div className="container mx-auto p-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="bg-gray-200 col-span-2 p-4">
+        <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[150px]" />
+        </div>
+        <div className="bg-gray-200 row-span-2 p-4">
+        <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[150px]" />
+
+        </div>
+        <div className="bg-gray-200 row-span-1 p-4">Item 3</div>
+        <div className="bg-gray-200 row-span-2 p-4">Item 4</div>
+        <div className="bg-gray-200 col-span-1 p-4">Item 4</div>
+        <div className="bg-gray-200  p-4">Item 4</div>
+      </div>
+    </div> */}
       <div className="w-full md:w-1/2 mb-4 md:mb-0 p-3 sm:p-6 rounded-md shadow-md">
         <img src={'sulur-service-center.jpeg'} alt="Left side" className="w-full h-[350px] " />
       </div>

@@ -135,11 +135,11 @@ export default function MainHomeComp (){
            
              <ul className='flex gap-x-4 sm:gap-x-9 z-0 pb-3.5 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
                 <>
-                <li onClick={() => SelectBrand("all")} className={`capitalize border p-1 rounded-lg list-none block cursor-pointer font-bold ${catName == 'all' ? 'text-blue-500' : "text-gray-400"}`}>
+                <li onClick={() => SelectBrand("all")} className={`capitalize border px-2 py-1 rounded-lg list-none block cursor-pointer font-semibold ${catName == 'all' ? 'text-blue-500' : "text-gray-400"}`}>
                         All
                     </li>
                 {categoryDataList.map((val,i)=>{
-                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize border p-1 rounded-lg list-none block cursor-pointer font-bold ${catName == val ? 'text-blue-500' : "text-gray-500"}`}>
+                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize border px-2 py-1 rounded-lg list-none block cursor-pointer font-semibold ${catName == val ? 'text-blue-500' : "text-gray-500"}`}>
                     {val}
                 </li>)
                 })}
@@ -153,7 +153,7 @@ export default function MainHomeComp (){
                 </ul>     
             </div>
 
-           <div className='w-full'>
+           <div className='w-full min-h-[52vh]'>
            {hompageProducts || hompageProducts !== null ? <>{ hompageProducts.length > 0 ?<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 w-full gap-3 p-3 sm:gap-5 sm:p-5'>
                  {hompageProducts.map((val,i)=>{
                     return <ProductCard key={i} val={val}/>
@@ -161,7 +161,7 @@ export default function MainHomeComp (){
             </div>:
              <div className='min-h-[50vh] grid items-center justify-center'>No Data...</div>}</>
              
-             : <div className='w-full min-h-[60vh] flex flex-col items-center justify-center'>
+             : <div className='w-full min-h-[50vh] flex flex-col items-center justify-center'>
               <div className='text-gray-500 animate-ping font-semibold'>Sulur Service Center</div> 
               <CustomLoader/></div>}
            </div>

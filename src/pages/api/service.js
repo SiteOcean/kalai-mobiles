@@ -2,7 +2,7 @@
 import axios from 'axios';
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
 // NEXT_PUBLIC_BACKEND_URI
-let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
+let backendPath = process.env.NEXT_PUBLIC_LOCAL_BACKEND_URI
 
 export const fetchAllProducts = async () => {
   let maxRetries = 3;

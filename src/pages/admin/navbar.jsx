@@ -12,7 +12,7 @@ export default function AdminNavbar (){
 
     const handleOnBlur=()=>{
         setTimeout(() => {
-            setNavState(false)
+            // setNavState(false)
         }, 200);
     }
     return(
@@ -32,12 +32,12 @@ export default function AdminNavbar (){
                         <MdOutlineMenu className='text-[30px] rounded font-bold cursor-pointer border p-1'/>
                     }
             </button>
-            <ul className={`flex flex-col px-2 justify-center py-4 divide-y divide-slate-300 bg-slate-100 z-30 opacity-95 right-0 left-0 sm:hidden fixed gap-y-3 text-[19px] duration-500
+            <ul className={`flex flex-col px-2 justify-center py-4 bg-slate-100 z-30 opacity-95 right-0 left-0 sm:hidden fixed gap-y-6 text-[19px] duration-500
             ${navState ? "top-[50px]" : "-top-[300px]"}`}>
-                 <li><Link href={'homepage'}>Home</Link></li>
-                <li><Link href={'offerPage'}>Offers</Link></li>
-                <li><Link href={'addProduct'}>Add-Product</Link></li>
-                <li><Link href={'addOffer'}>Add-Offer</Link></li>
+                 <Link className='border-b ' href={'homepage'}>Home</Link>
+                <Link className='border-b' href={'offerPage'}>Offers</Link>
+                <Link className='border-b' href={'addProduct'}>Add-Product</Link>
+                <Link className='border-b' href={'addOffer'}>Add-Offer</Link>
             </ul>
         </div>
 

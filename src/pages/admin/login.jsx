@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { loginService } from '../api/service';
+import CustomLoader from '@/components/loader';
 
 // NEXT_PUBLIC_LOCAL_BACKEND_URI // BACKEND_URI
 let backendPath = process.env.NEXT_PUBLIC_BACKEND_URI
@@ -10,14 +11,14 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [isLoading, setIsLoading] = useState(true)
   const router = useRouter(null);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+   
     // Reset previous error messages
-    setUsernameError('');
-    setPasswordError('');
+  
 
     // Client-side validation for username
     if (!username.trim()) {
@@ -30,13 +31,16 @@ const LoginForm = () => {
     }
 
     // If there are validation errors, return early
-    if (usernameError || passwordError) {
-      return;
-    }
+    // if (usernameError || passwordError) {
+    //   return;
+    // }
 
     try {
+      setIsLoading(false)
       const response = await loginService({username, password});
       if (response) {
+        setUsernameError('');
+      setPasswordError('');
         router.push('/admin/homepage/?id=' + response._id);
       }
      
@@ -46,11 +50,15 @@ const LoginForm = () => {
       setUsernameError('check Username!');
         setPasswordError('Check Password!');
     }
+    finally{
+      setIsLoading(true)
+      
+    }
   };
 
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="bg-white p-8 rounded shadow-md w-96">
+     {isLoading ? <div className="bg-white p-8 rounded shadow-md w-96">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
        
         <form>
@@ -102,7 +110,7 @@ const LoginForm = () => {
             Login
           </button>
         </form>
-      </div>
+      </div> : <div className='h-[60vh]'><CustomLoader/></div>}
     </div>
   );
 };

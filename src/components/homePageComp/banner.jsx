@@ -13,7 +13,7 @@ export default function BannerSection (){
 
     },[])
 
-    return(  <div  className="bg-blue-500 w-full h-[74vh] grid items-center text-white sm:py-16 text-center">
+    return(  <div  className="bg-blue-500 w-full h-[66vh] sm:h-[74vh] grid items-center text-white sm:py-16 text-center">
       <div className="w-[96%] mx-auto">
         
         <TypeAnimation
