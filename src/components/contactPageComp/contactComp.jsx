@@ -1,5 +1,6 @@
 // pages/contact.js
 import { MdLocationOn } from "react-icons/md";
+import { MdOutlineCall } from "react-icons/md";
 
 import React from 'react';
 
@@ -50,8 +51,8 @@ const ContactComp = () => {
       </section>
       <section className="mb-3 md:mb-6">
         <h2 className="text-2xl font-bold mb-1 sm:mb-2">Phone</h2>
-        <p className="text-gray-700">
-          Reach us by phone at <a href="tel:+918148140754" className="text-blue-500 font-bold hover:underline">+91-8148140754</a>.
+        <p className="text-gray-700 flex items-center">
+          <MdOutlineCall className="text-gray-500 mt-0.5"/><a href="tel:+918148140754" className="text-blue-500 underline font-bold hover:underline-offset-2">+91-8148140754</a>.
         </p>
       </section>
      

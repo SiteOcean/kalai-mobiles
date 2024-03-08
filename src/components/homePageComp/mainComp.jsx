@@ -109,7 +109,7 @@ export default function MainHomeComp (){
       };
 
     return(
-        <div className='relative w-full'> 
+        <div className='relative w-full bg-blue-500'> 
             {/* <BannerSection/> */}
             {!splashScreen ? <div className="w-full flex justify-center items-center">     
             <BannerSection/>   
@@ -129,17 +129,17 @@ export default function MainHomeComp (){
                 </ul>: null}
                 </div> */}
             
-            {/* <h1 className='text-center font-bold text-[28px] text-gray-500 py-2'>Select Category</h1> */}
-            <div className='flex gap-x-3 sticky top-[58px] sm:top-[65px] md:top-[65px] lg:top-[65px] bg-white overflow-auto w-full justify-center items-center pt-3'>
+            {/* <h1 className='text-center font-bold text-[28px] text-white py-2'>Select Category</h1> */}
+            <div className='flex gap-x-3 sticky top-[58px] sm:top-[65px] md:top-[65px] lg:top-[65px] bg-blue-500 overflow-auto w-full justify-center items-center pt-3'>
 
            
              <ul className='flex gap-x-4 sm:gap-x-9 z-0 pb-3.5 w-[92%] sm:w-[82%] mx-auto overflow-auto'>
                 <>
-                <li onClick={() => SelectBrand("all")} className={`capitalize border px-2 py-1 rounded-lg list-none block cursor-pointer font-semibold ${catName == 'all' ? 'text-blue-500' : "text-gray-400"}`}>
+                <li onClick={() => SelectBrand("all")} className={`capitalize border px-2 py-1 rounded-lg list-none block cursor-pointer font-semibold ${catName == 'all' ? 'text-gray-100 border-gray-400' : "text-white"}`}>
                         All
                     </li>
                 {categoryDataList.map((val,i)=>{
-                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize border px-2 py-1 rounded-lg list-none block cursor-pointer font-semibold ${catName == val ? 'text-blue-500' : "text-gray-500"}`}>
+                    return (<li key={i} onClick={() => fetchDataByCategory(val)} className={`capitalize border px-2 py-1 rounded-lg list-none block cursor-pointer font-semibold ${catName == val ? 'text-gray-100 border-gray-400' : "text-white"}`}>
                     {val}
                 </li>)
                 })}
@@ -162,7 +162,7 @@ export default function MainHomeComp (){
              <div className='min-h-[50vh] grid items-center justify-center'>No Data...</div>}</>
              
              : <div className='w-full min-h-[50vh] flex flex-col items-center justify-center'>
-              <div className='text-gray-500 animate-ping font-semibold'>Sulur Service Center</div> 
+              <div className='text-white animate-ping font-semibold'>Sulur Service Center</div> 
               <CustomLoader/></div>}
            </div>
                 </>}
