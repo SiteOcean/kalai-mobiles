@@ -13,7 +13,7 @@ export default function BannerSection (){
 
     },[])
 
-    return(  <div  className="bg-blue-500 w-full h-[66vh] sm:h-[74vh] grid items-center text-white sm:py-16 text-center">
+    return(  <div  className=" w-full h-[66vh] sm:h-[74vh] grid items-center  sm:py-16 text-center">
       <div className="w-[96%] mx-auto">
         
         <TypeAnimation
@@ -24,7 +24,7 @@ export default function BannerSection (){
         // 'We produce food for Hamsters',
       ]}
       wrapper="span"
-      className='text-transparent bg-clip-text bg-gradient-to-r from-[#ffffff] to-[#fdff87]  px-2 font-bold text-center text-[30px] mt-3 rounded-md animate-bounce'
+      className='text-transparent bg-clip-text bg-gradient-to-r from-[#ff50c5] via-[#eb2398] to-[#c83cff]  px-2 font-bold text-center text-[30px] mt-3 rounded-md animate-bounce'
       speed={20}
       style={{ fontSize: '2em', display: 'inline-block' }}
     

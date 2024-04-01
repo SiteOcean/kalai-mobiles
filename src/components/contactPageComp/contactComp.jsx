@@ -52,7 +52,12 @@ const ContactComp = () => {
       <section className="mb-3 md:mb-6">
         <h2 className="text-2xl font-bold mb-1 sm:mb-2">Phone</h2>
         <p className="text-gray-700 flex items-center">
-          <MdOutlineCall className="text-gray-500 mt-0.5"/><a href="tel:+918148140754" className="text-blue-500 underline font-bold hover:underline-offset-2">+91-8148140754</a>.
+        <MdOutlineCall className="text-gray-500 mt-0.5"/><a href="tel:+919087987828" className="text-blue-500 pl-2 underline font-bold hover:underline-offset-2">90-879-878-28</a>.
+
+        </p>
+        <p className="text-gray-700 flex items-center mt-2">
+        <MdOutlineCall className="text-gray-500 mt-0.5"/><a href="tel:+918148140754" className="text-blue-500 pl-2 underline font-bold hover:underline-offset-2">81-481-407-54</a>.
+
         </p>
       </section>
      

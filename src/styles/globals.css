@@ -25,7 +25,12 @@
   align-items: center;
   height: 100px; /* Adjust this to fit your layout */
 }
-
+.bgImage{
+  background-image: url('../../public/Banner2.jpg');
+  background-repeat: no-repeat;
+  /* filter: blur(5px);
+  opacity: 0.5; */
+}
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
